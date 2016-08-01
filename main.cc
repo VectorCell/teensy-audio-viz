@@ -4,10 +4,17 @@
 
 using namespace std;
 
-vector<int> pins = {13, 14, 15, 16};
+const int P_LED = 13;
+
+vector<int> pins = {21, 22, 23};
+
+int level = 0;
+bool inc = true;
+int iter = 0;
 
 void setup ()
 {
+	pinMode(P_LED, OUTPUT);
 	for (int p : pins) {
 		pinMode(p, OUTPUT);
 	}
@@ -16,16 +23,23 @@ void setup ()
 void loop ()
 {
 	for (int p : pins) {
-		digitalWriteFast(p, HIGH);
+		if (inc) {
+			++level;
+			if (level > 255) {
+				inc = false;
+				--level;
+			}
+		} else {
+			--level;
+			if (level < 0) {
+				inc = true;
+				++level;
+			}
+		}
+		analogWrite(p, level);
 	}
+	delay(5);
 
-	delay(500);
-
-	for (int p : pins) {
-		digitalWriteFast(p, LOW);
-	}
-
-	delay(500);
 }
 
 int main (void)
