@@ -7,7 +7,7 @@ Requires `gcc-arm-none-eabi` and [`teensy_loader_cli`](https://github.com/PaulSt
 In certain versions of Ubuntu, you may need to use `gcc-arm-embedded` instead:
 
 ```
-sudo apt-get remove gcc-arm-none-eabi
+sudo apt-get remove binutils-arm-none-eabi gcc-arm-none-eabi
 sudo add-apt-repository ppa:team-gcc-arm-embedded/ppa
 sudo apt-get update
 sudo apt-get install gcc-arm-embedded
