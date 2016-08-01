@@ -14,7 +14,7 @@ TARGET = main
 # the NO_ARDUINO behaviour.
 ifndef NO_ARDUINO
 # Path to your arduino installation
-ARDUINOPATH ?= /home/bismith/Programs/arduino-1.6.9
+#ARDUINOPATH ?= /home/bismith/Programs/arduino-1.6.9
 #ARDUINOPATH ?= ../../../..
 endif
 

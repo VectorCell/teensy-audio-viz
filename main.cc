@@ -2,11 +2,11 @@
 
 int main (void)
 {
-	pinMode(13, OUTPUT);
+	pinMode(14, OUTPUT);
 	while (1) {
-		digitalWriteFast(13, HIGH);
+		digitalWriteFast(14, HIGH);
 		delay(500);
-		digitalWriteFast(13, LOW);
+		digitalWriteFast(14, LOW);
 		delay(500);
 	}
 }
