@@ -8,10 +8,6 @@ const int P_LED = 13;
 
 vector<int> pins = {21, 22, 23};
 
-int level = 0;
-bool inc = true;
-int iter = 0;
-
 void setup ()
 {
 	pinMode(P_LED, OUTPUT);
@@ -20,40 +16,17 @@ void setup ()
 	}
 }
 
-void loop ()
-{
-	for (int p : pins) {
-		if (inc) {
-			++level;
-			if (level > 255) {
-				inc = false;
-				--level;
-			}
-		} else {
-			--level;
-			if (level < 0) {
-				inc = true;
-				++level;
-			}
-		}
-		analogWrite(p, level);
-	}
-	delay(5);
-
-}
-
 int main (void)
 {
 	setup();
-	while (1) {
-		loop();
-	}
 
-	//pinMode(13, OUTPUT);
-	//while (1) {
-	//	digitalWriteFast(13, HIGH);
-	//	delay(500);
-	//	digitalWriteFast(13, LOW);
-	//	delay(500);
-	//}
+	unsigned int pass = 0;
+	int level = LOW;
+	while (true) {
+		if ((pass & 0xfffff) == 0) {
+			level = (level == LOW) ? HIGH : LOW;
+			digitalWriteFast(P_LED, level);
+		}
+		++pass;
+	}
 }
