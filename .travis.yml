@@ -2,10 +2,11 @@ sudo: false
 language: c++
 compiler:
     - g++
-group: edge
 
 addons:
     apt:
+        sources:
+          - debian-sid
         packages:
             - gcc-multilib
             - gcc-arm-none-eabi
