@@ -1,7 +1,7 @@
 sudo: false
 language: c++
 compiler:
-    - arm-none-eabi-g++
+    - g++
 addons:
     apt:
         sources:
@@ -10,4 +10,4 @@ addons:
             - gcc-arm-embedded
             - libusb-dev
 script:
-    - make clean test
+    - make clean all
