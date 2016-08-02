@@ -2,12 +2,12 @@ sudo: false
 language: c++
 compiler:
     - g++
+
 addons:
     apt:
-        sources:
-            - team-gcc-arm-embedded
         packages:
-            - gcc-arm-embedded
+            - gcc-multilib
             - libusb-dev
+
 script:
     - make clean all
