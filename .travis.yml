@@ -1,0 +1,11 @@
+sudo: false
+language: c++
+compiler:
+    - gcc-arm-none-eabi
+addons:
+    apt:
+        packages:
+            - gcc-arm-none-eabi
+            - libusb-dev
+script:
+    - make clean test
