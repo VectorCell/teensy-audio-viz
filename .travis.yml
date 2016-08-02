@@ -4,8 +4,10 @@ compiler:
     - arm-none-eabi-g++
 addons:
     apt:
+        sources:
+            - team-gcc-arm-embedded
         packages:
-            - gcc-arm-none-eabi
+            - gcc-arm-embedded
             - libusb-dev
 script:
     - make clean test
