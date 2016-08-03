@@ -105,10 +105,10 @@ int main (void)
 	while (true) {
 		
 		digitalWriteFast(P_LED, HIGH);
-		//Serial.println("Gathering data ...");
+		Serial.println("Gathering data ...");
 		gather_data(sample, N_SAMPLES);
 		digitalWriteFast(P_LED, LOW);
-		//Serial.println("Calculating FFT ...");
+		Serial.println("Calculating FFT ...");
 		fft(sample, N_SAMPLES, 1);
 		delay(50);
 
