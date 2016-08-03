@@ -75,15 +75,15 @@ public:
 };
 
 
-class Serial
+class SerialEmulator
 {
 public:
-	static void begin (int baud)
+	void begin (int baud)
 	{
 		printf("initializing Serial with baud rate: %d\n", baud);
 	}
 
-	static void println (const char *str)
+	void println (const char *str)
 	{
 		printf("%s\n", str);
 	}
@@ -91,6 +91,7 @@ public:
 
 
 TestEnvironment env;
+SerialEmulator Serial;
 
 
 void analogWrite (int pin, int state)
