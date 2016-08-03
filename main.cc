@@ -25,7 +25,6 @@ void setup ()
 	#ifdef TESTING_MODE
 		set_signal_handlers();
 	#else
-		// set clock speed here
 		Serial.begin(9600);
 	#endif
 
@@ -46,7 +45,7 @@ void gather_data (double *data, int n)
 }
 
 
-void fft (double *data, int nn, int isign)
+void fft_impl (double *data, int nn, int isign)
 {
 	int n, mmax, m, j, istep, i;
 	double wtemp, wr, wpr, wpi, wi, theta;
@@ -93,26 +92,33 @@ void fft (double *data, int nn, int isign)
 }
 
 
+void fft (double *data, int nn, int isign)
+{
+	//return fft_impl(data, nn, isign);
+}
+
+
 int main (void)
 {
 	setup();
 
 	while (true) {
 		
-		//digitalWriteFast(P_LED, HIGH);
-		//gather_data(sample, N_SAMPLES);
-		//digitalWriteFast(P_LED, LOW);
-		//fft(sample, N_SAMPLES, 1);
+		digitalWriteFast(P_LED, HIGH);
+		//Serial.println("Gathering data ...");
+		gather_data(sample, N_SAMPLES);
+		digitalWriteFast(P_LED, LOW);
+		//Serial.println("Calculating FFT ...");
+		fft(sample, N_SAMPLES, 1);
+		delay(50);
 
-		#ifndef TESTING_MODE
-			digitalWriteFast(P_LED, HIGH);
-			//usb_serial_write("JELLO, WORLD!\n", strlen("JELLO, WORLD!\n"));
-			Serial.println("JELLO, WORLD!");
-			delay(500);
-			digitalWriteFast(P_LED, LOW);
-			//usb_serial_write("JELLO, WORLD!\n", strlen("JELLO, WORLD!\n"));
-			Serial.println("JELLO, WORLD!");
-			delay(500);
-		#endif
+		//#ifndef TESTING_MODE
+		//	digitalWriteFast(P_LED, HIGH);
+		//	Serial.println("JELLO, WORLD!");
+		//	delay(500);
+		//	digitalWriteFast(P_LED, LOW);
+		//	Serial.println("JELLO, WORLD!");
+		//	delay(500);
+		//#endif
 	}
 }

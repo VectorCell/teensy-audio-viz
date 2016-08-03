@@ -20,6 +20,7 @@ main.elf:
 	$(CXX) -std=$(CPPSTD) -O0 -Wall main.cc -o main.elf -DTESTING_MODE
 
 test: all
+	timeout --version
 	timeout --help
 	timeout --preserve-status -k 2 1 ./main.elf
 

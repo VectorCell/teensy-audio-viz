@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <chrono>
+#include <thread>
 #include <cstdlib>
 #include <cstdio>
 #include <cmath>
@@ -72,6 +74,22 @@ public:
 	}
 };
 
+
+class Serial
+{
+public:
+	static void begin (int baud)
+	{
+		printf("initializing Serial with baud rate: %d\n", baud);
+	}
+
+	static void println (const char *str)
+	{
+		printf("%s\n", str);
+	}
+};
+
+
 TestEnvironment env;
 
 
@@ -108,6 +126,11 @@ int digitalRead (int pin)
 {
 	//printf("digitalRead(%d)\n", pin);
 	return env.getPinState(pin) ? 0 : 1;
+}
+
+void delay (int ms)
+{
+	this_thread::sleep_for(chrono::milliseconds(ms));
 }
 
 static void signal_handler (int signo)
