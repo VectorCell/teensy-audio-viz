@@ -20,9 +20,7 @@ main.elf:
 	$(CXX) -std=$(CPPSTD) -O0 -Wall main.cc -o main.elf -DTESTING_MODE
 
 test: all
-	timeout --version
-	timeout --help
-	timeout --preserve-status -k 2 1 ./main.elf
+	timeout -k 2 1 ./main.elf && echo "FINISHED NORMALLY" || echo "TERMINATED"
 
 load: main.hex
 	sudo $$(which teensy_loader_cli) -v -mmcu=mk20dx256 -w main.hex
