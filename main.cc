@@ -24,6 +24,8 @@ void setup ()
 {
 	#ifdef TESTING_MODE
 		set_signal_handlers();
+	#else
+		// set clock speed here
 	#endif
 
 	pinMode(P_READ,  INPUT);
