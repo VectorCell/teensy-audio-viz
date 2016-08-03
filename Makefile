@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-all: main.hex
+all: main.hex main.elf
 
 main.hex: main.cc
 	cp main.cc lib/main.cpp
@@ -10,7 +10,7 @@ main.hex: main.cc
 main.elf:
 	g++ -std=c++11 -O0 -Wall main.cc -o main.elf -DTESTING_MODE
 
-test: main.hex main.elf
+test: all
 	timeout --preserve-status -k 2 1 ./main.elf
 
 load: main.hex

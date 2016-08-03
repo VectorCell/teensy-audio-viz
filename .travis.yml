@@ -9,5 +9,5 @@ before_install:
     - sudo apt-get install -y gcc-arm-embedded libusb-dev
 
 script:
-    - make clean all
+    - make clean test
     - ls -lah
