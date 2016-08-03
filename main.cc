@@ -26,6 +26,7 @@ void setup ()
 		set_signal_handlers();
 	#else
 		// set clock speed here
+		Serial.begin(9600);
 	#endif
 
 	pinMode(P_READ,  INPUT);
@@ -98,9 +99,20 @@ int main (void)
 
 	while (true) {
 		
-		digitalWriteFast(P_LED, HIGH);
-		gather_data(sample, N_SAMPLES);
-		digitalWriteFast(P_LED, LOW);
+		//digitalWriteFast(P_LED, HIGH);
+		//gather_data(sample, N_SAMPLES);
+		//digitalWriteFast(P_LED, LOW);
 		//fft(sample, N_SAMPLES, 1);
+
+		#ifndef TESTING_MODE
+			digitalWriteFast(P_LED, HIGH);
+			//usb_serial_write("JELLO, WORLD!\n", strlen("JELLO, WORLD!\n"));
+			Serial.println("JELLO, WORLD!");
+			delay(500);
+			digitalWriteFast(P_LED, LOW);
+			//usb_serial_write("JELLO, WORLD!\n", strlen("JELLO, WORLD!\n"));
+			Serial.println("JELLO, WORLD!");
+			delay(500);
+		#endif
 	}
 }
