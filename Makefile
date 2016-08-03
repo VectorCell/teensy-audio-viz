@@ -19,7 +19,7 @@ main.hex: main.cc
 main.elf:
 	$(CXX) -std=$(CPPSTD) -O0 -Wall main.cc -o main.elf -DTESTING_MODE
 
-test: all
+test: main.elf
 	timeout -k 2 1 ./main.elf && echo "FINISHED NORMALLY" || echo "TERMINATED"
 
 load: main.hex

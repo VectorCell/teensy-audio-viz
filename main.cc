@@ -13,8 +13,8 @@ using namespace std;
 #define TWOPI (2 * PI)
 
 #define P_LED  13
-#define P_READ 21
-vector<int> pwm_pins = {20, 22, 23};
+#define P_READ 14
+vector<int> pwm_pins = {23, 22, 20, 17, 16, 3, 4, 6, 9, 10};
 
 #define N_SAMPLES 2048
 double sample[N_SAMPLES];
@@ -104,21 +104,39 @@ int main (void)
 
 	while (true) {
 		
-		digitalWriteFast(P_LED, HIGH);
-		Serial.println("Gathering data ...");
-		gather_data(sample, N_SAMPLES);
-		digitalWriteFast(P_LED, LOW);
-		Serial.println("Calculating FFT ...");
-		fft(sample, N_SAMPLES, 1);
-		delay(50);
+		//digitalWriteFast(P_LED, HIGH);
+		//Serial.println("Gathering data ...");
+		//gather_data(sample, N_SAMPLES);
+		//digitalWriteFast(P_LED, LOW);
+		//Serial.println("Calculating FFT ...");
+		//fft(sample, N_SAMPLES, 1);
+		//delay(50);
 
-		//#ifndef TESTING_MODE
-		//	digitalWriteFast(P_LED, HIGH);
-		//	Serial.println("JELLO, WORLD!");
-		//	delay(500);
-		//	digitalWriteFast(P_LED, LOW);
-		//	Serial.println("JELLO, WORLD!");
-		//	delay(500);
-		//#endif
+		digitalWriteFast(P_LED, HIGH);
+		int val = analogRead(P_READ);
+		digitalWriteFast(P_LED, LOW);
+
+		//Serial.printf("val: %d", val);
+		//Serial.println();
+		for (unsigned int k = 0; k < pwm_pins.size(); ++k) {
+			int range_bottom = (k * 1024) / pwm_pins.size();
+			int range_top = ((k + 1) * 1024) / pwm_pins.size() - 1;
+			if (val < range_bottom) {
+				analogWrite(pwm_pins[k], 0);
+				//Serial.printf("%u: %d", k, 0);
+				//Serial.println();
+			} else if (val > range_top) {
+				analogWrite(pwm_pins[k], 255);
+				//Serial.printf("%u: %d", k, 255);
+				//Serial.println();
+			} else {
+				int level = 256 * (val - range_bottom) / (range_top - range_bottom);
+				analogWrite(pwm_pins[k], level);
+				//Serial.printf("%u: %d", k, level);
+				//Serial.println();
+			}
+		}
+
+		delay(5);
 	}
 }

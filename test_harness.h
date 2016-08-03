@@ -77,15 +77,27 @@ public:
 
 class SerialEmulator
 {
+
 public:
+
 	void begin (int baud)
 	{
 		printf("initializing Serial with baud rate: %d\n", baud);
 	}
 
+	void println ()
+	{
+		printf("\n");
+	}
+
 	void println (const char *str)
 	{
 		printf("%s\n", str);
+	}
+
+	void println (int n)
+	{
+		printf("%d\n", n);
 	}
 };
 
@@ -103,7 +115,8 @@ void analogWrite (int pin, int state)
 int analogRead (int pin)
 {
 	//printf("analogRead(%d)\n", pin);
-	return env.getPinState(pin);
+	return rand() % 1024;
+	//return env.getPinState(pin);
 }
 
 void pinMode (int pin, int mode)
