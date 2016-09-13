@@ -23,7 +23,7 @@ test: main.elf
 	timeout -k 2 1 ./main.elf && echo "FINISHED NORMALLY" || echo "TERMINATED"
 
 load: main.hex
-	sudo $$(which teensy_loader_cli) -v -mmcu=mk20dx256 -w main.hex
+	sudo which teensy_loader_cli -v -mmcu=mk20dx256 -w main.hex
 
 clean:
 	rm -f main.hex
