@@ -12,3 +12,5 @@ sudo add-apt-repository ppa:team-gcc-arm-embedded/ppa
 sudo apt-get update
 sudo apt-get install gcc-arm-embedded
 ```
+
+This is currently a work in progress. The plan is to turn it into a visualizer that pulses an array of LEDs according to a frequency band of the stereo audio signal input. This will require DSP.
